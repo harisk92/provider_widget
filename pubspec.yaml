@@ -1,8 +1,8 @@
 name: provider_widget
 description: ProviderWidget provides data and components downstream without any side effects that you get while using InheritedWidget.
 version: 0.0.1
-author:
-homepage:
+author: Haris Kovačević <programmerguy92@gmail.com>
+homepage: https://github.com/harisk92/provider_widget/
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
