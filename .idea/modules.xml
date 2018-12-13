@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example1/example1_android.iml" filepath="$PROJECT_DIR$/example1/example1_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/example_android.iml" filepath="$PROJECT_DIR$/example/example_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/provider_widget.iml" filepath="$PROJECT_DIR$/provider_widget.iml" />
     </modules>
   </component>
