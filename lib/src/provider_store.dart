@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:provider_widget/src/provider_element.dart';
+import 'package:provider_widget/src/provider.dart';
 
 /*
 ProviderStore is used to hold multiple components that implement @ProvidedElements and provide them using @ProviderWidget
@@ -12,37 +12,42 @@ class Api implements ProvidedElement{
 }
 
 ProviderStore([
-AppState(),
-Api(),
+Provider<AppState>(
+            provider: AppState(),
+            disposable: (provider) => {},
+          ),
+Provider<Api>(
+            provider: Api(),
+            disposable: (provider) => {},
+          ),
 ```
 ])
  */
-class ProviderStore extends ProvidedComponent {
-  final HashMap<Type, ProvidedComponent> providers = HashMap();
+class ProviderStore {
+  final HashMap<Type, Provider> providers = HashMap();
 
-  ProviderStore(List<ProvidedComponent> providedElements) {
-    if (providedElements == null) {
+  ProviderStore(List<Provider> providers) {
+    if (providers == null) {
       throw Exception("List of providers can't be null");
     }
-    for (ProvidedComponent provider in providedElements) {
+    for (dynamic provider in providers) {
       inject(provider);
     }
   }
 
-  ProvidedComponent get(Type type) => providers[type];
+  T get<T>() => providers[T].provider;
 
-  @override
   void dispose() {
     providers.forEach((_, provider) => provider.dispose());
+    providers.clear();
   }
 
-  void inject(ProvidedComponent provider) {
-    print("Injecting provider");
-    providers.putIfAbsent(provider.runtimeType, () => provider);
+  void inject(Provider provider) {
+    providers.putIfAbsent(provider.type, () => provider);
   }
 
-  void remove(Type type) {
-    ProvidedComponent provider = providers.remove(type);
+  void remove<T>() {
+    Provider provider = providers.remove(T);
     if (provider != null) {
       provider.dispose();
     }

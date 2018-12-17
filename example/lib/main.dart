@@ -5,8 +5,12 @@ void main() => runApp(
       ProviderWidget<ProviderStore>(
         child: MyApp(),
         provided: ProviderStore([
-          CounterState(),
+          Provider<CounterState>(
+            provider: CounterState(),
+            disposable: (provider) => {},
+          ),
         ]),
+        disposable: (ProviderStore value) {},
       ),
     );
 
@@ -39,7 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    counterState = ProviderWidget.of<ProviderStore>(context).get(CounterState);
+    counterState =
+        ProviderWidget.of<ProviderStore>(context).get<CounterState>();
   }
 
   void _incrementCounter() {
@@ -89,7 +94,7 @@ class CounterOverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CounterState counterState =
-        ProviderWidget.of<ProviderStore>(context).get(CounterState);
+        ProviderWidget.of<ProviderStore>(context).get<CounterState>();
     return Scaffold(
       body: Center(
           child: Text(
@@ -100,18 +105,8 @@ class CounterOverviewScreen extends StatelessWidget {
   }
 }
 
-class CounterState implements ProvidedComponent {
+class CounterState {
   int counter = 0;
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-  }
 }
 
-class Api implements ProvidedComponent {
-  @override
-  void dispose() {
-    // TODO: implement dispose
-  }
-}
+class Api {}

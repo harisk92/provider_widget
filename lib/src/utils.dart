@@ -1,3 +1,3 @@
 class TypeCreator {
-  static Type create<T>() => T;
+  static Type of<T>() => T;
 }
